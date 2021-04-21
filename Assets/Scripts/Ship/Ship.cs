@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-
+using Photon.Pun;
 namespace FLFlight
 {
     /// <summary>
@@ -26,9 +26,11 @@ namespace FLFlight
             Input = GetComponent<ShipInput>();
             Physics = GetComponent<ShipPhysics>();
         }
-
+        public PhotonView PV;
         private void Update()
         {
+            if (!PV.IsMine)
+                return;
             // Pass the input to the physics to move the ship.
             Physics.SetPhysicsInput(new Vector3(Input.Strafe, 0.0f, Input.Throttle), new Vector3(Input.Pitch, Input.Yaw, Input.Roll));
 

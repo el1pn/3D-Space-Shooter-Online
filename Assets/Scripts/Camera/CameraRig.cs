@@ -1,11 +1,12 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
 namespace FLFlight
 {
     public class CameraRig : MonoBehaviour
     {
         [Tooltip("The ship to follow around.")]
-        [SerializeField] private Transform ship = null;
+        public Transform ship = null;
 
         [Tooltip("The camera on this rig. Required for lookahead motions.")]
         [SerializeField] private Camera cam = null;
@@ -25,15 +26,26 @@ namespace FLFlight
         [SerializeField] private float verticalTurnDownAngle = 15.0f;
 
         const float kSpeedSlope = 0.0002f;
-
+        /*public PhotonView PV;*/
+        private void Start()
+        {
+            /*if (!PV.IsMine)
+            {
+                Destroy(GetComponentInChildren<Camera>().gameObject);
+            }*/
+        }
         private void Update()
         {
+            /*if (!PV.IsMine)
+                return;*/
             if (useFixed == false)
                 MoveCamera();
         }
 
         private void FixedUpdate()
         {
+            /*if (!PV.IsMine)
+                return;*/
             if (useFixed == true)
                 MoveCamera();
         }

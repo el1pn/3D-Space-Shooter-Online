@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
 namespace FLFlight
 {
@@ -36,9 +37,11 @@ namespace FLFlight
         public float Roll { get { return roll; } }
         public float Strafe { get { return strafe; } }
         public float Throttle { get { return throttle; } }
-
+        public PhotonView PV;
         private void Update()
         {
+            if (!PV.IsMine)
+                return;
             strafe = Input.GetAxis("Horizontal");
 
             SetStickCommandsUsingAutopilot();

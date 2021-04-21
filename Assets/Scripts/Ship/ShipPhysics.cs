@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Photon.Pun;
+using UnityEngine;
 
 namespace FLFlight
 {
@@ -38,9 +39,11 @@ namespace FLFlight
                 Debug.LogWarning(name + ": ShipPhysics has no rigidbody.");
             }
         }
-
+        public PhotonView PV;
         void FixedUpdate()
         {
+            if (!PV.IsMine)
+                return;
             if (Rigidbody != null)
             {
                 Rigidbody.AddRelativeForce(appliedLinearForce * forceMultiplier, ForceMode.Force);
